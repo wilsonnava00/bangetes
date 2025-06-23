@@ -2,7 +2,7 @@
 ini_set("display_errors", 0);
 
 $apibot = "7550683092:AAEnTVa3-lmXmsi2iVfCTSYwGGUjcW3gK8E";
-$canal =  "7550683092";
+$canal =  "-1002648324808";
 
 
 function getIP() {
