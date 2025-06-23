@@ -1,0 +1,559 @@
+/******************************************************************************************/
+/* APLICATIVO */
+/******************************************************************************************/
+
+
+.hide {
+    display: none;
+}
+
+body {
+    font-family: "Helvetica Neue LT std";
+}
+
+.titleRegister {
+    font-size: 18px;
+    font-family: "Helvetica Neue LT std";
+    color: #414042;
+    font-weight: bold;
+    text-align: center;
+}
+
+.titleRegistro {
+    font-size: 14px;
+    font-family: "Helvetica Neue LT std";
+    color: #414042;
+    font-weight: bold;
+    text-align: left;
+}
+
+.inicio {
+    color: #414042 !important;
+    font-size: 14px;
+    text-align-last: start !important;
+}
+
+
+.form-group label {
+    font-size: 14px;
+    color: #414042;
+    margin-bottom: 4px;
+}
+
+.form-controlini {
+    border: initial;
+    outline: initial !important;
+    background: #1e306700;
+    border: 1px solid #1a1a1a4a;
+    color: #414042;
+    border-bottom: 1px solid #1a1a1a4a;
+    height: 40px;
+    display: initial !important;
+    font-family: "Helvetica Neue LT std";
+}
+
+:root {
+    --color-green: #dee45e;
+    --color-red: #9e9a9a80;
+    --color-button: #fdffff;
+    --color-black: #dee45e;
+    --color-verde: #ffff;
+}
+
+.card2 {
+    color: #414042 !important;
+    font-family: "Helvetica Neue LT std";
+    word-wrap: break-word;
+}
+
+.switch-button {
+    display: inline-block;
+}
+
+.switch-button .switch-button__checkbox {
+    display: none;
+}
+
+.switch-button .switch-button__label {
+    background-color: var(--color-red);
+    width: 2rem;
+    height: 1rem;
+    border-radius: 3rem;
+    display: inline-block;
+    position: relative;
+}
+
+.switch-button .switch-button__label:before {
+    transition: .2s;
+    display: block;
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    content: '';
+    border-radius: 50%;
+    box-shadow: inset 0px 0px 0px 1px var(--color-black);
+    background-image: url('../assets/images/logos/isotipo.png');
+    background-size: 18px;
+}
+
+.switch-button .switch-button__checkbox:checked + .switch-button__label {
+    background-color: var(--color-green);
+}
+
+.switch-button .switch-button__checkbox:checked + .switch-button__label:before {
+    transform: translateX(1rem);
+}
+
+.left {
+    float: left;
+}
+
+.left-ini {
+    float: left;
+    padding: 12px;
+}
+
+.right-ini {
+    float: right;
+    padding: 13px !important;
+}
+
+.hide {
+
+    display: none;
+}
+
+td[data-toggle='tooltip'] {
+    color: #414042;
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #eeeeee61;
+    opacity: 2;
+    border-radius: 10px;
+}
+
+#agregar {
+    padding: 12px;
+}
+
+.iconoBeneficiario {
+    width: 60px;
+    cursor: pointer;
+}
+
+.agregarTransaccion {
+    float: right;
+    padding: 4px;
+    width: 140px;
+}
+
+.iconoAgregarTransaccion {
+    margin-top: 10%;
+}
+
+.error {
+    color: red;
+}
+
+.btn-default, .btn-outline-default {
+    border-color: #272828;
+    background: #272828;
+    box-shadow: 0 8px 25px -8px #272828;
+    border-color: #272828;
+    color: #fff;
+    font-weight: bold;
+    height: 50px;
+    margin-right: 1%;
+    margin-top: 1px;
+}
+
+.btn-outline-default:hover {
+    color: #fff;
+    background-color: #272828;
+    border-color: #272828;
+}
+
+.loginInicio {
+    background-image: url('../assets/images/bgLogin.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: auto;
+    font-family: Helvetica;
+    background-position: center center;
+}
+
+.app-footer .footer-bottom {
+    width: 100%;
+    background: #414042;
+    border-radius: 60px 20px 5px;
+    margin-left: 1%;
+    bottom: 0;
+}
+
+.iconoContacto {
+    width: 40%;
+}
+
+.iconoTransacciones {
+    width: 20%;
+    margin-right: 5%;
+    cursor: pointer;
+}
+
+.iconoTransaccionesN {
+    width: 20%;
+    cursor: pointer;
+}
+
+.topMargen {
+    margin-top: -2%;
+}
+
+.iconoTransaccionesInterna {
+    width: 65px;
+    cursor: pointer;
+}
+
+.fondoInicial {
+
+    background-image: url('../assets/images/bgLogin.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: auto;
+    font-family: Helvetica;
+
+}
+
+.cmdPrint {
+    height: 50px !important;
+}
+
+.textCenter {
+    text-align: center
+}
+
+.imagenAntiPhishingText {
+    text-align: left;
+    font-size: 12px;
+}
+
+.custom-menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 24px;
+    height: 20px;
+    margin: 0 20px;
+}
+
+.custom-menu-toggle div {
+    display: block;
+    border-bottom: 1px solid #dee45e;
+}
+
+@media (max-width: 670px) {
+    .imagenAntiPhishingImg {
+        text-align: right;
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .left {
+        float: right;
+    }
+
+    #cmdOlvido {
+        float: left !important;
+    }
+
+}
+
+.imagenAntiPhishingImg {
+    text-align: right;
+    font-size: 12px;
+}
+
+@media only screen and (max-width: 600px) {
+    .disabled {
+        display: none;
+    }
+
+    .done {
+        display: none;
+    }
+
+    .steps ul li:after {
+        position: absolute;
+        width: 1px;
+        height: 30px;
+        background: #ebebeb;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+    }
+
+    .imagenAntiPhishingImg {
+        text-align: center;
+        font-size: 12px;
+        margin-bottom: 2%;
+    }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    overflow: auto;
+}
+
+.centerDinamica {
+    display: grid;
+    place-items: center;
+}
+
+@media only screen and (max-width: 400px) {
+    .imgenAnthi {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media only screen and (max-width: 600px), (min-width: 400px) {
+    .imgenAnthi {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+/* Estilo para el text tooltips */
+.tooltip-inner {
+    background: #dee45e !important;
+    font: Helvetica !important;
+    font-family: "Helvetica Neue LT std";
+    font-size: 14px;
+    color: #414042;
+}
+
+::-ms-reveal {
+    display: none;
+}
+
+.ajusteCelda {
+    width: 20%;
+}
+
+.ajusteCeldaFecha {
+    width: 9%;
+}
+
+.notaColor {
+    color: #414042;
+}
+#logoHeader, #logoHeader img {
+    width: 100%;
+    max-width: 35px;
+}
+
+#logoHeaderMd {
+    display: none;
+}
+
+@media screen and (min-width: 576px) {
+    #logoHeader {
+        margin-left: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #logoHeader {
+        display: none;
+    }
+
+    #logoHeaderMd {
+        display: block;
+    }
+}
+
+.btn-outline-blue{
+    color: #414042 !important;
+    border-color: #414042 !important;
+}
+.filter-container {
+    margin-bottom: 20px;
+}
+
+.filter-container input[type="text"],
+.filter-container input[type="date"],
+.filter-container select {
+    width: calc(50% - 5px); /* Divide el ancho al 50% y resta un poco de espacio entre ellos */
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.filter-container input[type="text"],
+.filter-container input[type="date"],
+.filter-container select,
+.filter-container button {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.filter-container button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.filter-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para la paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.input-group .form-control {
+    position: relative;
+}
+
+.input-group .input-group-text {
+    position: absolute;
+    right: 10px; /* Ajusta la posición del ícono según sea necesario */
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.input-group .input-group-text {
+    background-color: transparent;
+}
+
+.basic-addon3{
+    background-color: transparent;
+}
+
+.borderCalendar{
+    background: none; border: none;
+}
+.sizeCalendarPM{
+    font-size: 1.5em !important;
+    padding-bottom: 0.6em !important;
+}
+.sizeCalendarMV{
+    font-size: 1.5em !important;
+    padding-bottom: 0.2em !important;
+}
+.sizeCalendarFC{
+    font-size: 1.5em !important;
+    padding-bottom: 0.4em !important;
+}
+
+.disabledButton{
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.main-content{
+    height: 100%;
+    min-height: fit-content;
+}
+
+.hipervinculo-home{
+    color: #414042; !important;
+}
+.disabledDiv {
+    pointer-events: none;
+    opacity: 0.5 !important;
+    cursor: not-allowed;
+}
+.disabledDivInput {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+.alineacion{
+    float: inline-end;
+    text-combine-upright: inherit;
+    margin-top: -60px;
+    white-space: collapse;
+    width: 550px;
+    word-wrap: break-word;
+    padding: 15px;
+    font-size: 12px;
+}
+@media screen and (max-width: 768px) {
+    .alineacion {
+        float: left;
+        text-combine-upright: inherit;
+        margin-top: 0px;
+        white-space: collapse;
+        width: 550px;
+        word-wrap: break-word;
+        padding: 15px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 1170px) and (min-width: 770px) {
+
+    .alineacion {
+        float: left;
+        text-combine-upright: inherit;
+        margin-top: 0px;
+        white-space: collapse;
+        width: 550px;
+        word-wrap: break-word;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 1170px) and (min-width: 776px) {
+
+    .alineacion {
+        float: inline-end;
+        text-combine-upright: inherit;
+        margin-top: -60px;
+        white-space: collapse;
+        width: 350px;
+        word-wrap: break-word;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 770px) {
+
+    .alineacion {
+        float: left;
+        text-combine-upright: inherit;
+        margin-top: 0px;
+        white-space: collapse;
+        width: 350px;
+        word-wrap: break-word;
+        font-size: 12px;
+    }
+}
+
+.notaMensaje{
+    font-size: 12px;
+}
+
+.ajuste{
+    word-wrap: anywhere;
+}
+
+
+
+
+
+
+

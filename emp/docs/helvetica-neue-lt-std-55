@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'Helvetica Neue LT Std';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Helvetica Neue LT Std'), url('https://fonts.cdnfonts.com/s/13322/HelveticaNeueLTStd-Cn.woff') format('woff');
+}
+@font-face {
+    font-family: 'Helvetica Neue LT Std';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Helvetica Neue LT Std'), url('https://fonts.cdnfonts.com/s/13322/HelveticaNeueLTStd-It.woff') format('woff');
+}
+@font-face {
+    font-family: 'Helvetica Neue LT Std';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Helvetica Neue LT Std'), url('https://fonts.cdnfonts.com/s/13322/HelveticaNeueLTStd-LtCn.woff') format('woff');
+}
+@font-face {
+    font-family: 'Helvetica Neue LT Std';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Helvetica Neue LT Std'), url('https://fonts.cdnfonts.com/s/13322/HelveticaNeueLTStd Lt.woff') format('woff');
+}
+@font-face {
+    font-family: 'Helvetica Neue LT Std';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Helvetica Neue LT Std'), url('https://fonts.cdnfonts.com/s/13322/HelveticaNeueLTStd-BdCn.woff') format('woff');
+}
+
+

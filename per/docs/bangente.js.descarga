@@ -1,0 +1,376 @@
+/**
+ * Created by emsys.
+ */
+
+var postURL;
+var container;
+
+var timer;
+loadURL = null;
+checkURL = null;
+
+$(document).ready(function () {
+    container = $('.main-content');
+    $.extend($.validator.messages, {
+        required: 'Este campo es obligatorio.',
+        remote: 'Por favor, rellena este campo.',
+        email: 'Por favor, escribe una dirección de correo válida',
+        url: 'Por favor, escribe una URL válida.',
+        date: 'Por favor, escribe una fecha válida.',
+        dateISO: 'Por favor, escribe una fecha (ISO) válida.',
+        number: 'Por favor, escribe solo números.',
+        digits: 'Por favor, escribe sólo dígitos.',
+        creditcard: 'Por favor, escribe un número de tarjeta válido.',
+        equalTo:
+            'Por favor, verifique valor no coincide con el campo anterior.',
+        accept: 'Por favor, escribe un valor con una extensión aceptada.',
+        maxlength: jQuery.validator.format(
+            'Por favor, escribe un valor menor o igual a {0} caracteres.'
+        ),
+        minlength: jQuery.validator.format(
+            'Por favor, no escribas menos de {0} caracteres.'
+        ),
+        rangelength: jQuery.validator.format(
+            'Por favor, escribe un valor entre {0} y {1} caracteres.'
+        ),
+        range: jQuery.validator.format(
+            'Por favor, escribe un valor entre {0} y {1}.'
+        ),
+        max: jQuery.validator.format(
+            'Por favor, escribe un valor menor o igual a {0}.'
+        ),
+        min: jQuery.validator.format(
+            'Por favor, escribe un valor mayor o igual a {0}.'
+        ),
+    });
+
+    /*
+     * AJAX CALLS
+     */
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        },
+    });
+
+    postURL = function (url, container, data, callback, dataType, interno, multipart) {
+        if (dataType === null) dataType = 'html';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            ...(multipart ? { contentType: !multipart, processData: !multipart } : {}),
+            dataType: dataType,
+            cache: false, // (warning: setting it to false will cause a timestamp and will call the request twice)
+            beforeSend: function () {
+                $('body')
+                    .append(
+                        "<div class='loadscreen' id='preloader'>" +
+                            "<div class='loader spinner-bubble spinner-bubble-primary'></div></div>"
+                    )
+                    .delay(50)
+                    .animate(
+                        {
+                            opacity: '1.0',
+                        },
+                        300
+                    );
+            },
+            success: function (data) {
+                if (typeof callback == 'function') {
+                    callback(data);
+                } else {
+                    if (container != null) {
+                       const isMainContent = $(container).hasClass("main-content");
+
+                        container.html(data).delay(50).animate(
+                            {
+                                opacity: '1.0',
+                            },
+                            300,
+                            function() {
+
+                                if(isMainContent) {
+
+                                    window.scroll({
+                                        top: 0,
+                                        behavior: "smooth"
+                                    })
+                                    document.querySelector("html").scroll({
+                                        top: 0,
+                                        behavior: "smooth"
+                                    })
+                                }
+                            }
+
+
+                        )
+
+
+
+                    }
+                }
+            },
+            error: function (xhr, status, thrownError, error) {
+                switch (xhr.status) {
+                    case 401:
+                    case 419:
+                        var navigationEntries =
+                            window.performance.getEntriesByType('navigation');
+                        if (navigationEntries.length > 0) {
+                            var navigationType = navigationEntries[0].type;
+                            if (navigationType === 'reload') {
+                                sessionStorage.removeItem('ibankingSession');
+                            }
+                        }
+                        window.location.reload();
+                        break;
+                    case 500:
+                        swal({
+                            type: 'error',
+                            text: 'Estimado Cliente, en estos momentos no podemos procesar su solicitud, por favor intente de nuevo mas tarde',
+                            showCancelButton: false,
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            allowEnterKey: false,
+                        }).then(function (d) {
+                            var urlSplit = url.split('/');
+                            if(urlSplit[3] == 'pms'){
+                                container = $('.main-content');
+                                data =
+                                    ' <br><br>' +
+                                    '<br><br>' +
+                                    '<h5 class="ajax-loading-error">' +
+                                    '<p class="text-center"><i class="fa fa-warning txt-color-orangeDark"></i> Estimado Cliente, en estos momentos no podemos procesar su solicitud, por favor intente de nuevo mas tarde</p>' +
+                                    '</h5>';
+                                container
+                                    .css({
+                                        opacity: '0.0',
+                                    })
+                                    .html(data)
+                                    .delay(50)
+                                    .animate(
+                                        {
+                                            opacity: '1.0',
+                                        },
+                                        300
+                                    );
+                            }
+                            if (urlSplit[3]) {
+                                if (
+                                    urlSplit[3] != 'lg' &&
+                                    urlSplit[3] != 'rg' &&
+                                    urlSplit[3] != 'du' &&
+                                    urlSplit[3] != 'oum'
+                                ) {
+                                    data =
+                                        ' <br><br>' +
+                                        '<br><br>' +
+                                        '<h5 class="ajax-loading-error">' +
+                                        '<p class="text-center"><i class="fa fa-warning txt-color-orangeDark"></i> Estimado Cliente, en estos momentos no podemos procesar su solicitud, por favor intente de nuevo mas tarde</p>' +
+                                        '</h5>';
+                                    if (container !== null) {
+                                        container
+                                            .css({
+                                                opacity: '0.0',
+                                            })
+                                            .html(data)
+                                            .delay(50)
+                                            .animate(
+                                                {
+                                                    opacity: '1.0',
+                                                },
+                                                300
+                                            );
+                                    }
+                                } else {
+                                    postURL('error', $('.auth-box'));
+                                }
+                            }
+                        });
+                        break;
+                    default:
+                        swal({
+                            type: 'error',
+                            text: 'Estimado Cliente, en estos momentos no podemos procesar su solicitud, por favor intente de nuevo mas tarde',
+                            showCancelButton: false,
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            allowEnterKey: false,
+                        }).then(function (d) {
+                            postURL('error', $('.auth-box'));
+                        });
+                        break;
+                }
+            },
+            complete: function (data) {
+                $('#preloader').animate({
+                    opacity: '0.0'
+                }, 100, function() {
+                    $(this).remove();
+                });
+                $('.tooltips').hide();
+                $('.tooltips').hide();
+            },
+            async: true,
+        });
+    };
+
+    checkURL = function () {
+        //get the url by removing the hash
+        var url = location.href.split('#').splice(1).join('#');
+        //BEGIN: IE11 Work Around
+        if (!url) {
+            try {
+                var documentUrl = window.document.URL;
+                if (documentUrl) {
+                    if (
+                        documentUrl.indexOf('#', 0) > 0 &&
+                        documentUrl.indexOf('#', 0) < documentUrl.length + 1
+                    ) {
+                        url = documentUrl.substring(
+                            documentUrl.indexOf('#', 0) + 1
+                        );
+                    }
+                }
+            } catch (err) {}
+        }
+        //END: IE11 Work Around
+        container = $('#content');
+        // Do this if url exists (for page refresh, etc...)
+        if (url) {
+            // remove all active class
+            $('.navigationbar li.active').removeClass('active');
+            // match the url and add the active class
+            $('.navigationbar li:has(a[href="' + url + '"])').addClass(
+                'active'
+            );
+            var title = $('.navigationbar a[href="' + url + '"]').attr('title');
+
+            // change page title from global var
+            document.title = title || document.title;
+
+            // debugState
+            if (debugState) {
+                root.console.log(
+                    'Page title: %c ' + document.title,
+                    debugStyle_green
+                );
+            }
+
+            // parse url to jquery
+            postURL(url + location.search, container);
+        } else {
+            $('.navigationbar li.active').removeClass('active');
+
+            // grab the first URL from .navigationbar
+            var $this = $(
+                '.navigationbar > ul > li:first-child > a[href!="#"]'
+            );
+            $(
+                '.navigationbar li:has(a[href="' + $this.attr('href') + '"])'
+            ).addClass('active');
+            postURL($this.attr('href'), container);
+
+            //clear dom reference
+            $this = null;
+        }
+    };
+
+    // fire links with targets on different window
+    $(document).on('click', '.navigationbar a[target="_blank"]', function (e) {
+        e.preventDefault();
+        var $this = $(e.currentTarget);
+
+        window.open($this.attr('href'));
+    });
+
+    // fire links with targets on same window
+    $(document).on('click', '.navigationbar a[target="_top"]', function (e) {
+        e.preventDefault();
+        var $this = $(e.currentTarget);
+
+        window.location = $this.attr('href');
+    });
+
+    // all links with hash tags are ignored
+    $(document).on('click', '.navigationbar a[href="#"]', function (e) {
+        e.preventDefault();
+    });
+
+    // DO on hash change
+    $(window).on('hashchange', function () {
+        checkURL();
+    });
+
+    var mod = {};
+    mod.d = function (url) {
+        postURL(url, container);
+    };
+
+    getLetrasNumeros = function (num) {
+        const ones = [
+            '',
+            'uno',
+            'dos',
+            'tres',
+            'cuatro',
+            'cinco',
+            'seis',
+            'siete',
+            'ocho',
+            'nueve',
+            'diez',
+            'once',
+            'doce',
+            'trece',
+            'catorce',
+            'quince',
+            'dieciséis',
+            'diecisiete',
+            'dieciocho',
+            'diecinueve',
+        ];
+        const tens = [
+            '',
+            '',
+            'veinte',
+            'treinta',
+            'cuarenta',
+            'cincuenta',
+            'sesenta',
+            'setenta',
+            'ochenta',
+            'noventa',
+        ];
+
+        if (num < 20) {
+            return ones[num];
+        }
+
+        if (num < 100) {
+            return (
+                tens[Math.floor(num / 10)] +
+                (num % 10 !== 0 ? ' y ' + ones[num % 10] : '')
+            );
+        }
+    };
+});
+function formatearMonto(monto) {
+    if (isNaN(monto)) {
+        return '';
+    }
+    let partes = monto.toString().split('.');
+    let entero = partes[0];
+    let decimal = partes.length > 1 ? partes[1] : '';
+
+    entero = entero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+    if (decimal) {
+        decimal = ',' + decimal; 
+    }
+    return entero + decimal;
+}
